@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ILY PARUUUULLLL 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', 'Comic Sans MS', cursive;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 35px 40px;
+      border-radius: 24px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 1.9rem;
+      color: #ff4d6d;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 25px 0;
+      color: #333;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      border: none;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      position: absolute;
+      transition: transform 0.15s ease;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+      left: 50%;
+      transform: translateX(-110%);
+    }
+
+    .no {
+      background: #eee;
+      color: #333;
+      left: 50%;
+      transform: translateX(10%);
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 24px;
+      animation: floatUp 1.5s ease forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-120px) scale(1.6); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="title">Quick Question 😌</h1>
+    <p id="question">Do you love me? 💕</p>
+
+    <div class="buttons" id="buttons">
+      <button class="yes" id="yesBtn">Yes ❤️</button>
+      <button class="no" id="noBtn">No 🙄</button>
+    </div>
+
+    <div class="footer" id="footer">Be honest… if you can 😏</div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const buttons = document.getElementById('buttons');
+    const questionEl = document.getElementById('question');
+    const titleEl = document.getElementById('title');
+    const footerEl = document.getElementById('footer');
+
+    let step = 1;
+
+    function moveNoButton() {
+      const containerRect = buttons.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = containerRect.width - btnRect.width;
+      const maxY = containerRect.height - btnRect.height;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noBtn.style.left = randomX + 'px';
+      noBtn.style.top = randomY + 'px';
+    }
+
+    function burstHearts() {
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = '💖';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.bottom = '20px';
+        heart.style.animationDuration = (1 + Math.random()) + 's';
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 1600);
+      }
+    }
+
+    noBtn.addEventListener('mouseover', moveNoButton);
+    noBtn.addEventListener('touchstart', moveNoButton);
+
+    yesBtn.addEventListener('click', () => {
+      burstHearts();
+
+      if (step === 1) {
+        step = 2;
+        titleEl.textContent = 'One More Thing 🥺';
+        questionEl.textContent = 'Do you want to be my wife? 💍';
+        footerEl.textContent = 'Think carefully… this is important 😏';
+        noBtn.style.left = '50%';
+        noBtn.style.top = '0';
+        noBtn.style.transform = 'translateX(10%)';
+      } else {
+        titleEl.textContent = 'Best Answer Ever 💍💖';
+        questionEl.textContent = 'I can’t wait to spend my life with you 😭❤️';
+        buttons.innerHTML = '';
+        footerEl.textContent = 'Forever starts now ✨';
+      }
+    });
+  </script>
+</body>
+</html>
